@@ -1,0 +1,29 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #e9ecef;
+    position: relative;
+}
+
+
+footer {
+    background-color: dark;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+h1, h2, h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; /* Semi-bold */
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+.centered {
+    text-align: center;
+}
