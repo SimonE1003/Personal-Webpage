@@ -9,11 +9,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body class="home">
         <!--Navigation Bar-->
         <nav class="navbar navbar-dark bg-black d-flex flex-nowrap">
             <div class="d-flex align-items-center">
-            <a class="navbar-brand ps-3" href="#">SiWang</a>
+            <a class="navbar-brand ps-3" href="index.html">SiWang</a>
             <ul class="navbar-nav flex-row">
                 <li class="nav-item active px-2">
                     <a class="nav-link" href="index.html">Home</a>
@@ -31,16 +31,126 @@
             </div>
         </nav>
 
-        <div class="container mt-5">
-            <h1>Projects</h1>
-            <p>A science based habit tracker (in progress)</p>
-        </div>
+        
+    <main class="container my-5">          
+        
+        <section class="panel panel-narrow p-4 p-md-5 mb-4 mb-md-5">
+        <div class="row g-1 align-items-center">
 
-        <footer class="mt-5 bg-dark text-white py-2">
-            <div class="container">
-                <p class="text-center">Copyright &#169; Wang Yuming</p>
+            <!-- Mobile-only title: first on phone -->
+            <div class="col-12 d-md-none">
+            <h2 class="mb-3">MyHabits</h2>
             </div>
-        </footer>
+
+            <!-- Image: second on phone, right on desktop -->
+            <div class="col-md-4 order-2 order-md-2 d-flex justify-content-center">
+            <img
+                src="./assets/image/MyHabitDemo.PNG"
+                alt="MyHabitDemo"
+                class="img-fluid photo-frame"
+                style="max-width: 700px;"
+            />
+            </div>
+
+            <!-- Text: third on phone, left on desktop -->
+            <div class="col-md-8 order-3 order-md-1">
+            <!-- Desktop-only title -->
+            <h2 class="mb-3 d-none d-md-block">MyHabits</h2>
+
+            <ul class="text-secondary mb-3">
+                <li>Science based personalized habit tracker.</li>
+                <li>Help you develop, maintain good habits and break bad habits.</li>
+                <li>Still actively maintaining and updating.</li>
+            </ul>
+
+            <div class="project-meta mt-3">
+                <div class="meta-row">
+                <div class="meta-label">Time span</div>
+                <div class="meta-value text-secondary">2025.12 — Present</div>
+                </div>
+
+                <div class="meta-row mt-2">
+                <div class="meta-label">Tech stack</div>
+                <div class="meta-value tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">HTML/CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                </div>
+                </div>
+            </div>
+
+            <a class="btn btn-terminal px-4 mt-3" href="https://simone1003.pythonanywhere.com">Go to MyHabits</a>
+            </div>
+
+        </div>
+        </section>
+
+
+        
+        <section class="panel panel-narrow p-4 p-md-5">
+        <div class="row g-1 align-items-center">
+
+            <!-- Mobile-only title: first on phone -->
+            <div class="col-12 d-md-none">
+            <h2 class="mb-3">7-Days</h2>
+            </div>
+
+            <!-- Image: second on phone, right on desktop -->
+            <div class="col-md-4 order-2 order-md-2 d-flex justify-content-center">
+            <img
+                src="./assets/image/7-days_demo.PNG"
+                alt="7-days demo"
+                class="img-fluid photo-frame"
+                style="max-width: 700px;"
+            />
+            </div>
+
+            <!-- Text: third on phone, left on desktop -->
+            <div class="col-md-8 order-3 order-md-1">
+            <!-- Desktop-only title -->
+            <h2 class="mb-3 d-none d-md-block">7-Days</h2>
+
+            <ul class="text-secondary mb-3">
+                <li>Text-based survival game that can run in your terminal.</li>
+                <li>Developed with my friends in Uni.</li>
+                <li>Download it from GitHub and play!</li>
+            </ul>
+
+            <!-- Meta: Time span + Tech stack -->
+            <div class="project-meta mt-3">
+                <div class="meta-row">
+                <div class="meta-label">Time span</div>
+                <div class="meta-value text-secondary">2025.3 — 2025.5</div>
+                </div>
+
+                <div class="meta-row mt-2">
+                <div class="meta-label">Tech stack</div>
+                <div class="meta-value tech-stack">
+                    <span class="tech-badge">C++</span>
+                    <span class="tech-badge">Makefile</span>
+                </div>
+                </div>
+            </div>
+
+            <a class="btn btn-terminal px-4 mt-3" href="https://github.com/SimonE1003/7-days">
+                Check it out on GitHub
+            </a>
+            </div>
+
+        </div>
+        </section>
+
+    </main>
+
+    <div class="footer-spacer" aria-hidden="true"></div>
+
+    <footer>
+    <div class="container">
+        <p class="text-center mb-0">Copyright &#169; Wang Yuming</p>
+    </div>
+    </footer>
 
     </body>
 </html>

@@ -9,11 +9,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body class="home">
         <!--Navigation Bar-->
         <nav class="navbar navbar-dark bg-black d-flex flex-nowrap">
             <div class="d-flex align-items-center">
-            <a class="navbar-brand ps-3" href="#">SiWang</a>
+            <a class="navbar-brand ps-3" href="index.html">SiWang</a>
             <ul class="navbar-nav flex-row">
                 <li class="nav-item active px-2">
                     <a class="nav-link" href="index.html">Home</a>
@@ -31,17 +31,52 @@
             </div>
         </nav>
 
-        <div class="container mt-5">
-            <h1>About me</h1>
-            <p>My name is Simon</p>
-            <p>I like watching movies</p>
-        </div>
+        
+    <main class="container my-5">          
+        
+        <section class="panel panel-narrow p-4 p-md-5">
+        <div class="row g-4 align-items-center">
 
-        <footer class="mt-5 bg-dark text-white py-2">
-            <div class="container">
-                <p class="text-center">Copyright &#169; Wang Yuming</p>
+            <!-- Photo: on mobile first (top), on desktop right -->
+            <div class="col-md-4 order-1 order-md-2 d-flex justify-content-center">
+            <img
+                src="./assets/image/test.jpg"
+                alt="Simon Wang portrait"
+                class="img-fluid photo-frame d-block mx-auto"
+                style="max-width: 260px;"
+            />
             </div>
-        </footer>
+
+            <!-- Text: on mobile second (below), on desktop left -->
+            <div class="col-md-8 order-2 order-md-1">
+            <h1 class="mb-3">Bio</h1>
+
+            <ul class="text-secondary mb-4">
+                <li>I'm Simon (Wang Yuming). Computer Science @ HKU.</li> 
+                <li>Grew up across Beijing & Singapore.</li>
+                <li>Currently exploring systems for habit design</li>
+            </ul>
+
+            <h2 class="h5 mt-4">Interests</h2>
+            <ul class="text-secondary mb-0">
+                <li>Sports: BJJ, Gym</li>
+                <li>Music: Guitar</li>
+                <li>Media: Movies, Books and Podcasts</li>
+            </ul>
+
+            <a class="btn btn-terminal px-4 mt-3" href="projects.html">Secret Personal Photo Gallery</a>
+            </div>
+
+        </div>
+        </section>
+
+    </main>
+
+    <footer>
+    <div class="container">
+        <p class="text-center mb-0">Copyright &#169; Wang Yuming</p>
+    </div>
+    </footer>
 
     </body>
 </html>

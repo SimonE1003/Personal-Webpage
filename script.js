@@ -14,5 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
   const greetingElement = document.getElementById('greeting');
-  typeWriter("Welcome to my site!", greetingElement, 80);
+  typeWriter("Hi, I'm Simon Wang.", greetingElement, 80);
 });

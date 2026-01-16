@@ -1,29 +1,482 @@
+
+/* =========================================================
+   Global (Minimal + Soft Hacker Terminal on Light Gray)
+   ========================================================= */
+
+:root {
+  /* Background */
+  --bg: #e9ecef;
+
+  /* Text */
+  --text: rgba(18, 20, 22, 0.92);
+  --muted: rgba(18, 20, 22, 0.62);
+
+  /* Brand / Accent (more restrained than neon) */
+  --hack-green: #2fd772;
+  --hack-green-dim: rgba(47, 215, 114, 0.55);
+
+  /* Terminal panel (charcoal, NOT pure black) */
+  --panel: rgba(22, 24, 23, 0.86);          /* softer than #000 */
+  --panel-top: rgba(0, 0, 0, 0.25);
+  --panel-border: rgba(47, 215, 114, 0.18); /* subtle green border */
+
+  /* Footer / Navbar */
+  --nav-bg: #000;
+  --footer-bg: #000;
+
+  /* Layout */
+  --footer-height: 56px;
+
+  /* Radius */
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #e9ecef;
-    position: relative;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+
+  /* Because footer is fixed, reserve space so content isn't covered */
+  padding-bottom: calc(var(--footer-height) + env(safe-area-inset-bottom) + 32px);
 }
 
-
-footer {
-    background-color: dark;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
+/* Typography */
 h1, h2, h3 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600; /* Semi-bold */
+  font-family: var(--font-sans);
+  font-weight: 600;
   letter-spacing: -0.5px;
   margin-bottom: 1rem;
 }
 
-p {
-  margin-bottom: 0.5rem;
+p { margin-bottom: 0.5rem; }
+
+.centered { text-align: center; }
+
+/* Prevent layout jump while typewriter runs */
+#greeting {
+  min-height: 3.2rem;
 }
 
-.centered {
-    text-align: center;
+/* =========================================================
+   Navbar / Footer (keep your structure; just make it consistent)
+   ========================================================= */
+
+.navbar {
+  background: var(--nav-bg) !important;
 }
+
+/* Optional subtle separator under navbar (won't break anything) */
+.navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.navbar .nav-link {
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+  opacity: 1;
+}
+
+/* Fixed footer: use valid color + set height */
+footer {
+  background: var(--footer-bg);
+  color: rgba(255, 255, 255, 0.92);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  display: flex;
+  align-items: center;
+  z-index: 10;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer p {
+  margin: 0;
+  opacity: 0.88;
+}
+
+/* =========================================================
+   Terminal (Hacker vibe but harmonious on light gray)
+   - Works with your current HTML structure/classes.
+   ========================================================= */
+
+.terminal {
+  width: min(860px, 92vw);
+  margin-inline: auto;
+
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  overflow: hidden;
+  position: relative;
+
+  /* Softer shadow so it doesn't feel "cut out" on light background */
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 14px 44px rgba(0, 0, 0, 0.20),
+    0 0 20px rgba(47, 215, 114, 0.06);
+
+  backdrop-filter: blur(10px);
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+  background: var(--panel-top);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.92;
+}
+
+.dot.red { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green { background: #28c840; }
+
+.terminal-title {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.terminal-body {
+  padding: 28px 26px 30px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+/* Prompt line + cursor */
+.prompt-line {
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.prompt-cmd {
+  color: var(--hack-green);
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  margin-left: 6px;
+  background: var(--hack-green);
+  vertical-align: -3px;
+  animation: blink 1s steps(1) infinite;
+  opacity: 0.8;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Main greeting + subtitle */
+.terminal-title-main {
+  color: rgba(245, 255, 249, 0.92);
+  text-shadow: 0 0 14px rgba(47, 215, 114, 0.10);
+}
+
+.terminal-subtitle {
+  color: rgba(245, 255, 249, 0.62);
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+/* Terminal buttons */
+.btn-terminal {
+  color: var(--hack-green);
+  border: 1px solid var(--panel-border);
+  background: rgba(47, 215, 114, 0.04);
+  border-radius: var(--radius-pill);
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.btn-terminal:hover {
+  background: rgba(47, 215, 114, 0.10);
+  border-color: rgba(47, 215, 114, 0.26);
+  box-shadow: 0 0 0 4px rgba(47, 215, 114, 0.10);
+  transform: translateY(-1px);
+}
+
+/* Subtle scanlines (even lighter on light background harmony) */
+.terminal::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025),
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 2px,
+    transparent 7px
+  );
+  opacity: 0.07;
+}
+
+/* =========================================================
+   Small utilities (nice defaults)
+   ========================================================= */
+
+a { text-decoration: none; }
+
+.text-secondary {
+  /* Make Bootstrap .text-secondary look good on light bg too */
+  color: var(--muted) !important;
+}
+
+/* Home cover: center content without magic numbers */
+.home-cover{
+  min-height: calc(100vh - var(--footer-height) - 56px); /* 56px 约等于 navbar 高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   HOME: Dark Starfield Stage (CSS only, no images)
+   ========================================================= */
+
+body.home {
+  background: #070a12; /* 基底暗色 */
+  color: rgba(240, 255, 246, 0.92);
+}
+
+
+/* ===== Home starfield (replace your current body.home::before) ===== */
+body.home::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  /* 用“可重复的星点纹理”做三层：小星(密)、中星(中)、大星(少) */
+  background-image:
+    /* small stars */
+    radial-gradient(rgba(255,255,255,0.55) 1px, transparent 1.6px),
+    /* medium stars */
+    radial-gradient(rgba(255,255,255,0.45) 1.2px, transparent 2.0px),
+    /* big stars */
+    radial-gradient(rgba(255,255,255,0.35) 1.6px, transparent 2.6px),
+
+    /* subtle nebula haze (very soft) */
+    radial-gradient(circle at 20% 30%, rgba(120, 180, 255, 0.10), transparent 45%),
+    radial-gradient(circle at 75% 25%, rgba(47, 215, 114, 0.07), transparent 42%),
+    radial-gradient(circle at 50% 85%, rgba(180, 120, 255, 0.06), transparent 48%);
+
+  /* 每层星点的“平铺大小”不同，形成层次 */
+  background-size:
+    140px 140px,
+    220px 220px,
+    360px 360px,
+    cover,
+    cover,
+    cover;
+
+  /* 每层星点的起始位置错开，避免网格感 */
+  background-position:
+    0 0,
+    40px 60px,
+    120px 20px,
+    center,
+    center,
+    center;
+
+  background-repeat: repeat, repeat, repeat, no-repeat, no-repeat, no-repeat;
+
+  /* 让星点更像“嵌在暗里”，而不是白点贴纸 */
+  filter: contrast(1.08) saturate(1.03);
+  opacity: 0.95;
+
+  /* 漂移（非常慢） */
+  animation: star-drift 60s linear infinite;
+}
+
+/* 星空缓慢漂移 */
+@keyframes star-drift{
+  from{
+    background-position:
+      0 0,
+      40px 60px,
+      120px 20px,
+      center,
+      center,
+      center;
+  }
+  to{
+    background-position:
+      -180px 120px,
+      -260px 200px,
+      -420px 280px,
+      center,
+      center,
+      center;
+  }
+}
+
+/* 轻微闪烁：让星空“活着”但不打扰 */
+body.home{
+  position: relative;
+}
+body.home.twinkle::before{
+  animation: star-drift 60s linear infinite, star-twinkle 6s ease-in-out infinite;
+}
+@keyframes star-twinkle{
+  0%, 100% { opacity: 0.92; }
+  50%      { opacity: 1.00; }
+}
+
+/* 尊重减少动态设置：用户不想动就不动 */
+@media (prefers-reduced-motion: reduce){
+  body.home::before,
+  body.home.twinkle::before{
+    animation: none !important;
+  }
+}
+
+/* Home 页 container 的文字颜色校准（避免 Bootstrap 默认色冲突） */
+body.home .text-secondary {
+  color: rgba(240, 255, 246, 0.62) !important;
+}
+
+
+/* ===== Softer glassy header/footer on dark stage ===== */
+
+/* Header (navbar) */
+body.home .navbar {
+  background: rgba(8, 10, 16, 0.42) !important; /* 比纯黑柔和 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: none;
+}
+
+/* Footer */
+body.home footer {
+  background: rgba(8, 10, 16, 0.42);  /* 不用 !important 也行，如果被覆盖再加 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: none;
+}
+
+
+/* Glass panel: semi-transparent container */
+.panel{
+  border-radius: 16px;
+  background: rgba(15, 17, 22, 0.62);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 16px 55px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(255,255,255,0.03) inset;
+  backdrop-filter: blur(12px);
+}
+
+.photo-frame{
+  width: 100%;
+  max-width: 360px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+  display: block;
+}
+
+
+/* 让项目详情面板在大屏上更窄、更像“阅读列” */
+.panel-narrow{
+  max-width: 1200px;   /* 你可以改成 900 / 860 更紧凑 */
+  margin: 0 auto;
+}
+
+
+/* Project meta block (Time span / Tech stack) */
+.project-meta{
+  border-top: 1px solid rgba(255,255,255,0.10);
+  padding-top: 14px;
+}
+
+.meta-row{
+  display: grid;
+  grid-template-columns: 110px 1fr; /* 左侧标签固定宽度，右侧自适应 */
+  gap: 12px;
+  align-items: start;
+}
+
+.meta-label{
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace);
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(240,255,246,0.55);
+}
+
+.meta-value{
+  font-size: 14px;
+}
+
+/* Tech stack badges: subtle, fits your terminal aesthetic */
+.tech-stack{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-badge{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  color: rgba(240,255,246,0.85);
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Mobile: label above value (more readable on narrow screens) */
+@media (max-width: 576px){
+  .meta-row{
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* Spacer to prevent fixed footer covering content */
+.footer-spacer{
+  height: calc(var(--footer-height) + env(safe-area-inset-bottom) + 24px);
+  background: transparent;
+}
+
+

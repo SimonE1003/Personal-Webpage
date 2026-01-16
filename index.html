@@ -9,11 +9,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body class="home">
         <!--Navigation Bar-->
         <nav class="navbar navbar-dark bg-black d-flex flex-nowrap">
             <div class="d-flex align-items-center">
-            <a class="navbar-brand ps-3" href="#">SiWang</a>
+            <a class="navbar-brand ps-3" href="index.html">SiWang</a>
             <ul class="navbar-nav flex-row">
                 <li class="nav-item active px-2">
                     <a class="nav-link" href="index.html">Home</a>
@@ -31,18 +31,46 @@
             </div>
         </nav>
 
-    <script src="script.js"></script>
+    
+    
+    <div class="container">
+        <div class="text-center py-4 home-cover">
+            <!-- Typewriter 主标题 -->     
+            <div class="terminal mx-auto">
+                <div class="terminal-bar">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="terminal-title">simonwang@site:~</span>
+                </div>
 
-    <div class="container mt-5">
-        <h1 class="centered" id = "greeting"></h1>
-            <h4 class="centered"> Feel free to check me out.</h3>
+                <div class="terminal-body">
+                    <div class="prompt-line">$ <span class="prompt-cmd">whoami</span><span class="cursor"></span></div>
+
+                    <h1 class="centered mb-3 terminal-title-main" id="greeting"></h1>
+
+                    <p class="terminal-subtitle mb-4">
+                    Welcome — notes, projects, and small experiments.
+                    </p>
+
+                    <div class="d-flex gap-2 justify-content-center flex-wrap">
+                    <a class="btn btn-terminal px-4" href="projects.html">View Projects</a>
+                    <a class="btn btn-terminal px-4" href="about.html">About Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="mt-5 bg-dark text-white py-2">
-        <div class="container">
-            <p class="text-center">Copyright &#169; Simon Wang</p>
-        </div>
+
+
+    <footer>
+    <div class="container">
+        <p class="text-center mb-0">Copyright &#169; Wang Yuming</p>
+    </div>
     </footer>
+    
+    <script src="script.js"></script>
 
     </body>
 </html>
