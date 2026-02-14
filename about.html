@@ -9,6 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body class="home">
         <!--Navigation Bar-->
         <nav class="navbar navbar-dark bg-black d-flex flex-nowrap">
@@ -64,7 +65,14 @@
                 <li>Media: Movies, Books and Podcasts.</li>
             </ul>
 
-            <a class="btn btn-terminal px-4 mt-3" href="projects.html">Secret Personal Photo Gallery</a>
+            
+            <a id="secretGalleryLink" class="btn btn-terminal px-4 mt-3" href="secret-gallery.html">
+            Secret Personal Photo Gallery
+            </a>
+
+            <!-- 错误提示：答错时显示 -->
+            <div id="secretError" class="text-danger mt-2 d-none"></div>
+
             </div>
 
         </div>
@@ -77,6 +85,52 @@
         <p class="text-center mb-0">Copyright &#169; Wang Yuming</p>
     </div>
     </footer>
+
+    <script>
+    const ANSWER = 2019; 
+
+    // 谜语
+    const RIDDLE =
+        "🗝️ Secret Check:\n" +
+        "Enter the sum of my birthday (YYYY + MM + DD).\n" +
+        "Example: 2001-09-07 → 2001+9+7 = 2017";
+
+    const link = document.getElementById("secretGalleryLink");
+    const errBox = document.getElementById("secretError");
+
+    link.addEventListener("click", function (e) {
+        e.preventDefault(); // 阻止直接跳转
+
+        // 清空错误提示
+        errBox.classList.add("d-none");
+        errBox.textContent = "";
+
+        const input = prompt(RIDDLE);
+        if (input === null) return; // 用户点了取消
+
+        const trimmed = input.trim();
+
+        // 只接受纯数字
+        if (!/^\d+$/.test(trimmed)) {
+        errBox.textContent = "❌ Please enter numbers only.";
+        errBox.classList.remove("d-none");
+        return;
+        }
+
+        const value = Number(trimmed);
+
+        if (value === ANSWER) {
+        // 答对：跳转到按钮 href 指向的页面
+        sessionStorage.setItem("secret_unlocked", "1");
+        window.location.href = link.getAttribute("href");
+        } 
+        else {
+        // 答错：显示错误
+        errBox.textContent = "❌ Wrong answer! You don't know my birthday bruh??";
+        errBox.classList.remove("d-none");
+        }
+    });
+    </script>
 
     </body>
 </html>
