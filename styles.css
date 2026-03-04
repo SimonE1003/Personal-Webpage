@@ -480,3 +480,69 @@ body.home footer {
 }
 
 
+/* ===== Secret Gallery (square grid) ===== */
+
+.mono-path{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  letter-spacing: .2px;
+}
+
+/* Square thumbnail button */
+.thumb{
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* square like WeChat */
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+  background: #0b0f0b;
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  cursor: pointer;
+}
+
+.thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform .25s ease, filter .25s ease;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.thumb:hover{
+  transform: translateY(-2px);
+  border-color: rgba(44,255,44,.25);
+  box-shadow: 0 14px 26px rgba(0,0,0,.35);
+}
+
+.thumb:hover img{
+  transform: scale(1.08);
+  filter: saturate(1.12) contrast(1.10) brightness(.98);
+}
+
+/* Modal styling to match dark/terminal vibe */
+.gallery-modal{
+  background: rgba(0,0,0,.92);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(234,255,234,.92);
+}
+
+/* 让 modal 里的图片“完整显示在屏幕内”，不需要滚动 */
+.gallery-modal-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;              /* 你可以调小/调大 */
+}
+
+/* 图片自适应视口：宽高都不超过屏幕，可完整看到 */
+.gallery-modal-img{
+  max-width: 100%;
+  max-height: calc(100vh - 120px); /* 关键：减去 header + padding 的空间 */
+  width: auto;
+  height: auto;
+  object-fit: contain;        /* 保持比例完整展示，不裁切 */
+  border-radius: 12px;
+}
