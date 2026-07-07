@@ -501,7 +501,8 @@ body.home footer {
   cursor: pointer;
 }
 
-.thumb img{
+.thumb img,
+.thumb video{
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -517,7 +518,8 @@ body.home footer {
   box-shadow: 0 14px 26px rgba(0,0,0,.35);
 }
 
-.thumb:hover img{
+.thumb:hover img,
+.thumb:hover video{
   transform: scale(1.08);
   filter: saturate(1.12) contrast(1.10) brightness(.98);
 }
