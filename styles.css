@@ -94,6 +94,12 @@ p { margin-bottom: 0.5rem; }
   opacity: 1;
 }
 
+/* 当前页面导航高亮 */
+.navbar .nav-item.active .nav-link {
+  color: var(--hack-green) !important;
+  opacity: 1;
+}
+
 /* Fixed footer: use valid color + set height */
 footer {
   background: var(--footer-bg);
@@ -276,7 +282,7 @@ body.home {
 }
 
 
-/* ===== Home starfield (replace your current body.home::before) ===== */
+/* ===== Home nebula haze (stars are drawn by starfield.js canvas) ===== */
 body.home::before{
   content:"";
   position: fixed;
@@ -284,88 +290,22 @@ body.home::before{
   z-index: -2;
   pointer-events: none;
 
-  /* 用“可重复的星点纹理”做三层：小星(密)、中星(中)、大星(少) */
+  /* 仅保留柔和星云，星空由 canvas (starfield.js) 绘制 */
   background-image:
-    /* small stars */
-    radial-gradient(rgba(255,255,255,0.55) 1px, transparent 1.6px),
-    /* medium stars */
-    radial-gradient(rgba(255,255,255,0.45) 1.2px, transparent 2.0px),
-    /* big stars */
-    radial-gradient(rgba(255,255,255,0.35) 1.6px, transparent 2.6px),
-
-    /* subtle nebula haze (very soft) */
     radial-gradient(circle at 20% 30%, rgba(120, 180, 255, 0.10), transparent 45%),
     radial-gradient(circle at 75% 25%, rgba(47, 215, 114, 0.07), transparent 42%),
     radial-gradient(circle at 50% 85%, rgba(180, 120, 255, 0.06), transparent 48%);
 
-  /* 每层星点的“平铺大小”不同，形成层次 */
-  background-size:
-    140px 140px,
-    220px 220px,
-    360px 360px,
-    cover,
-    cover,
-    cover;
-
-  /* 每层星点的起始位置错开，避免网格感 */
-  background-position:
-    0 0,
-    40px 60px,
-    120px 20px,
-    center,
-    center,
-    center;
-
-  background-repeat: repeat, repeat, repeat, no-repeat, no-repeat, no-repeat;
-
-  /* 让星点更像“嵌在暗里”，而不是白点贴纸 */
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
   filter: contrast(1.08) saturate(1.03);
   opacity: 0.95;
-
-  /* 漂移（非常慢） */
-  animation: star-drift 60s linear infinite;
 }
 
-/* 星空缓慢漂移 */
-@keyframes star-drift{
-  from{
-    background-position:
-      0 0,
-      40px 60px,
-      120px 20px,
-      center,
-      center,
-      center;
-  }
-  to{
-    background-position:
-      -180px 120px,
-      -260px 200px,
-      -420px 280px,
-      center,
-      center,
-      center;
-  }
-}
-
-/* 轻微闪烁：让星空“活着”但不打扰 */
-body.home{
-  position: relative;
-}
-body.home.twinkle::before{
-  animation: star-drift 60s linear infinite, star-twinkle 6s ease-in-out infinite;
-}
-@keyframes star-twinkle{
-  0%, 100% { opacity: 0.92; }
-  50%      { opacity: 1.00; }
-}
-
-/* 尊重减少动态设置：用户不想动就不动 */
-@media (prefers-reduced-motion: reduce){
-  body.home::before,
-  body.home.twinkle::before{
-    animation: none !important;
-  }
+/* canvas 曲速星空层 */
+#warp-starfield{
+  z-index: -1;
 }
 
 /* Home 页 container 的文字颜色校准（避免 Bootstrap 默认色冲突） */
@@ -414,10 +354,33 @@ body.home footer {
 }
 
 
-/* 让项目详情面板在大屏上更窄、更像“阅读列” */
+/* 让项目详情面板在大屏上更窄、更像"阅读列" */
 .panel-narrow{
   max-width: 1200px;   /* 你可以改成 900 / 860 更紧凑 */
   margin: 0 auto;
+}
+
+/* 项目卡片 hover 效果 */
+.panel-narrow{
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.panel-narrow:hover{
+  transform: translateY(-3px);
+  border-color: rgba(47, 215, 114, 0.35);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.03) inset,
+    0 0 30px rgba(47, 215, 114, 0.08);
+}
+
+/* About 页面更窄的阅读列 */
+.panel-bio{
+  max-width: 820px;
+}
+
+/* Contact 页面更窄的居中列 */
+.panel-contact{
+  max-width: 640px;
 }
 
 
@@ -547,4 +510,38 @@ body.home footer {
   height: auto;
   object-fit: contain;        /* 保持比例完整展示，不裁切 */
   border-radius: 12px;
+}
+
+
+/* ===== Contact page ===== */
+.contact-list{
+  list-style: none;
+  padding: 0;
+}
+.contact-list li{
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.contact-list li:last-child{
+  border-bottom: none;
+}
+.contact-label{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--hack-green-dim);
+  min-width: 80px;
+}
+.contact-link{
+  color: rgba(240,255,246,0.88) !important;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.contact-link:hover{
+  color: var(--hack-green) !important;
 }
