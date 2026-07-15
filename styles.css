@@ -353,6 +353,19 @@ body.home footer {
   display: block;
 }
 
+/* 项目图片点击放大按钮 */
+.project-img-btn{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  transition: transform 0.2s ease;
+}
+.project-img-btn:hover .photo-frame{
+  border-color: rgba(47, 215, 114, 0.35);
+}
+
 
 /* 让项目详情面板在大屏上更窄、更像"阅读列" */
 .panel-narrow{

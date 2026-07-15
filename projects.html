@@ -49,12 +49,17 @@
 
             <!-- Image: second on phone, right on desktop -->
             <div class="col-md-4 order-2 order-md-2 d-flex justify-content-center">
+            <button type="button" class="project-img-btn"
+                    data-bs-toggle="modal" data-bs-target="#photoModal"
+                    data-img="./assets/image/projects/swt_pipline.png"
+                    data-cap="AI Tour Guide Pipeline">
             <img
-                src="./assets/image/projects/stw.png"
-                alt="AI Tour Guide Module"
+                src="./assets/image/projects/swt_pipline.png"
+                alt="AI Tour Guide Pipeline"
                 class="img-fluid photo-frame"
                 style="max-width: 700px;"
             />
+            </button>
             </div>
 
             <!-- Text: third on phone, left on desktop -->
@@ -108,12 +113,17 @@
 
             <!-- Image: second on phone, right on desktop -->
             <div class="col-md-4 order-2 order-md-2 d-flex justify-content-center">
+            <button type="button" class="project-img-btn"
+                    data-bs-toggle="modal" data-bs-target="#photoModal"
+                    data-img="./assets/image/projects/MyHabitDemo.PNG"
+                    data-cap="MyHabits">
             <img
                 src="./assets/image/projects/MyHabitDemo.PNG"
                 alt="MyHabitDemo"
                 class="img-fluid photo-frame"
                 style="max-width: 700px;"
             />
+            </button>
             </div>
 
             <!-- Text: third on phone, left on desktop -->
@@ -163,12 +173,17 @@
 
             <!-- Image: second on phone, right on desktop -->
             <div class="col-md-4 order-2 order-md-2 d-flex justify-content-center">
+            <button type="button" class="project-img-btn"
+                    data-bs-toggle="modal" data-bs-target="#photoModal"
+                    data-img="./assets/image/projects/7-days_demo.PNG"
+                    data-cap="7-Days">
             <img
                 src="./assets/image/projects/7-days_demo.PNG"
                 alt="7-days demo"
                 class="img-fluid photo-frame"
                 style="max-width: 700px;"
             />
+            </button>
             </div>
 
             <!-- Text: third on phone, left on desktop -->
@@ -207,6 +222,38 @@
         </section>
 
     </main>
+
+    <!-- Modal (Lightbox) -->
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content gallery-modal">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title mono-path" id="photoModalCaption">Photo</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-2 gallery-modal-body">
+            <img id="photoModalImg" class="gallery-modal-img" src="" alt="Expanded photo">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal wiring -->
+    <script>
+      const modal = document.getElementById("photoModal");
+      const imgEl = document.getElementById("photoModalImg");
+
+      modal.addEventListener("show.bs.modal", (event) => {
+        const btn = event.relatedTarget;
+        imgEl.src = btn.getAttribute("data-img");
+        document.getElementById("photoModalCaption").textContent =
+          btn.getAttribute("data-cap") || "Photo";
+      });
+
+      modal.addEventListener("hidden.bs.modal", () => {
+        imgEl.src = "";
+      });
+    </script>
 
     <div class="footer-spacer" aria-hidden="true"></div>
 
